@@ -86,6 +86,22 @@ async def register(user: User):
 async def get_html():
     return "<h1>这是一级标题</h1>"
 
+
+# 第二部分 中间件
+@app.middleware("http")
+async def middleware(request,call_next):
+    print("中间件2 start")
+    response = await call_next(request)
+    print("中间件2 end")
+    return response
+
+@app.middleware("http")
+async def middleware2(request,call_next):
+    print("中间件1 start")
+    response = await call_next(request)
+    print("中间件1 end")
+    return response
+
 # 需求 结构 返回一张图片内容
 @app.get("/file")
 async def get_file():
