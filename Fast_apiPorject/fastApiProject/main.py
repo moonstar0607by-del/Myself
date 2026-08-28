@@ -1,6 +1,6 @@
 import uuid
 
-from fastapi import FastAPI, Path, Query, HTTPException
+from fastapi import FastAPI, Path, Query, HTTPException, Depends
 from pydantic import BaseModel, Field
 from fastapi.responses import HTMLResponse,FileResponse
 from typing import Annotated
@@ -13,6 +13,13 @@ app = FastAPI()
 async def root():
     return {"message": "Hello World"}
 
+# 依赖注入 分页参数逻辑共用
+# 1. 依赖项
+async def common_parameter(
+        skip : int =  Query(default=0,ge=0),
+        limit: int = Query(default=10,ge=60),
+):
+    return {"skip":skip,"limit":limit}
 
 # 访问 /hello 响应结果 msg：你好 FastAPI
 @app.get("/hello")
@@ -49,11 +56,12 @@ async def get_book(id: int = Path(default=..., gt=0, lt=101, description="书籍
 
 # 需求 查询新闻 分页， skip：跳过的记录数， limit：返回的记录数
 @app.get("/news/news_list/")
-async def get_news_list(
-    skip:int = Query(default=0, gt=0, lt=101, description="跳过的记录数"),
-    limit:int = Query(10,description="返回的记录数")
-):
-    return{"skip":skip,"limit":limit}
+async def get_news_list(common = Depends(common_parameter)):
+    return common
+
+@app.get("/user/user_list")
+async def get_user_list(common = Depends(common_parameter)):
+    return common
 
 # @app.get("/books/books_list")
 # async def get_books_list(
