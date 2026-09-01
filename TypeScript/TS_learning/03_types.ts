@@ -52,3 +52,4 @@ s3 = e3 as string; // 类型断言，告诉TS e3的类型是string，可以赋�
 
 
 
+export{};

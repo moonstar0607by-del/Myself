@@ -24,3 +24,6 @@ function sum1(e: number, f: number) : number
 }
 
 console.log(sum1(10, 20)); // 输出30
+
+
+export{};

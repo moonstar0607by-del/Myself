@@ -20,6 +20,27 @@
 - [ Ing ] FastAPI 官方教程动手过 ;
     - 基础部分学习了，下一步是ORM提高，暂未开始
 - [ ] TS 入门,打通最薄全链路:表单 -> POST /logs -> SQLite -> GET /logs -> 列表渲染;
+    - 各环节
+        - 环节 1：表单（前端）
+            - [ ] 写一个 <form>，含 1~2 个字段（如 content、level）
+            - [ ] 阻止默认提交行为，用 fetch 手动发请求
+            - [ ] TS 考点：给表单数据定义接口 interface LogInput { content: string; level: 'info' | 'warn' | 'error' }
+        - 环节 2：POST /logs（后端接口）
+            - [ ] Express 接收 POST，解析 JSON body
+            - [ ] 校验字段（content 非空、level 合法），不合法返回 400
+            - [ ] TS 考点：给请求体写类型；区分 unknown → 类型收窄（自定义类型守卫是最典型的练习）
+        - 环节 3：SQLite（持久化）
+            - [ ] 建库建表：CREATE TABLE IF NOT EXISTS logs (...)
+            - [ ] 用参数化查询插入（防 SQL 注入的习惯）
+            - [ ] TS 考点：给查询结果定义 interface LogRow，理解数据库返回的是“不确定的形状”
+        - 环节 4：GET /logs（查询接口）
+            - [ ] 查询全部（或加个 limit），返回 JSON 数组
+            - [ ] TS 考点：定义统一响应类型，如 type ApiResult<T> = { ok: true; data: T } | { ok: false; error: string }
+        - 环节 5：列表渲染（前端闭环）
+            - [ ] 页面加载时 fetch('/logs')，拿到数组
+            - [ ] 渲染成 <ul> 或表格
+            - [ ] 提交成功后刷新列表，看到新数据出现 ← 这一刻全链路打通
+            - [ ] TS 考点：querySelector<HTMLElement> 泛型、fetch 返回 unknown 的处理    
 - [√] 当周部署到云服务器上线,每日小步提交。
 - [√] Myself 仓库补根 .gitignore;
 - [√] D3 不再确认Attached版本，开始读书计划
