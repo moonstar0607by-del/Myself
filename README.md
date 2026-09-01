@@ -4,16 +4,18 @@
 
 > 系统的长期记忆、决策与冲刺计划在本地 `E:\冰\CONTEXT.md`;本仓库只放代码、学习日志与每周计划记录。
 
-## 当前进度(2026-08-27)
+## 当前进度(2026-09-01)
 
-- 第 0 周完成:FastAPI 教程主线练习(路由 / 参数 / 请求体 / 响应 / 异常处理)+ `GET /logs` 硬编码 JSON 跑通。
+- W1 进展:FastAPI 教程基础(路由 / 参数 / 请求体 / 响应 / 异常)+ 中间件、依赖注入完成,ORM 提高暂缓;TypeScript 基础类型四章(变量声明、字面量/联合/any/unknown/void/never/object/函数/数组/元组/枚举/交叉/别名),环境报错已解决(dist 隔离、export{}、重启 TS server)。
+- 打通最薄全链路尚未开始:SQLite、POST /logs、前端表单/列表渲染、部署上线为剩余重点。
+- 仓库已有 12 个 commit(8/28 x4、8/29 x3、9/01 x2 等),main 与 origin/main 同步。
 - 学习日志见 `logs_learning/`(demo = 完成的代码练习,note = 概念笔记;按约定两者均为"字迹",非特别紧急不改动)。
-- 冲刺一 W1(9/01)起:TypeScript 入门、SQLite、POST /logs、前端列表渲染、部署上线、每日小步提交。
 
 ## 仓库结构
 
 - `Fast_apiPorject/fastApiProject/main.py` — FastAPI 练习代码
-- `logs_learning/` — 每周学习日志双文件(1_week_demo.md / 1_week_notes.md)
+- `TypeScript/TS_learning/` — TS 入门练习(01-04);`TypeScript/dist/` 为编译产物
+- `logs_learning/` — 学习日志(1_week_demo.md / 1_week_notes.md / 2_week_notes.md)
 - `ROUTINE.md` — 每周计划执行记录
 
 ## 代码所有权协议(D9)
@@ -24,4 +26,5 @@
 
 ## 历史
 
+- 2026-08-28 ~ 09-01:W1 学习小步提交(FastAPI 中间件/依赖注入/ORM 暂缓,TS 入门四章)。
 - 2026-08-24 / 08-27:建仓,第 0 周学习提交。
