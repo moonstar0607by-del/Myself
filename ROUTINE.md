@@ -23,8 +23,8 @@
     - 进度：TS 基础类型四章已完成（8/28-9/01），环境报错已解决；SQLite/POST/表单/列表渲染未开始
     - 各环节
         - 环节 1：表单（前端）
-            - [ ] 写一个 <form>，含 1~2 个字段（如 content、level）
-            - [ ] 阻止默认提交行为，用 fetch 手动发请求
+            - [√] 写一个 <form>，含 1~2 个字段（如 content、level）
+            - [√] 阻止默认提交行为，用 fetch 手动发请求
             - [ ] TS 考点：给表单数据定义接口 interface LogInput { content: string; level: 'info' | 'warn' | 'error' }
         - 环节 2：POST /logs（后端接口）
             - [ ] Express 接收 POST，解析 JSON body
