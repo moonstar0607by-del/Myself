@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="Mydemo" content="width=device-width, initial-scale=1.0">
+  <title>信息提交表单</title>
+</head>
+
+<body>
+
+  <h1>信息提交demo测试</h1>
+
+  <form action="/submit" method="post">
+
+    <!-- 字段1：content（内容） -->
+    <label for="content">内容：</label>
+    <br>
+    <textarea id="content" name="content" rows="4" cols="30"
+              placeholder="请输入内容"></textarea>
+    <br><br>
+
+    <!-- 字段2：level（等级） -->
+    <label for="level">等级：</label>
+    <br>
+    <select id="level" name="level">
+      <option value="low">低</option>
+      <option value="medium" selected>中</option>
+      <option value="high">高</option>
+    </select>
+    <br><br>
+
+    <!-- 提交按钮 -->
+    <button type="submit">提交</button>
+
+  </form>
+
+</body>
+
+</html>
