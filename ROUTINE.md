@@ -26,6 +26,7 @@
             - [√] 写一个 <form>，含 1~2 个字段（如 content、level）
             - [√] 阻止默认提交行为，用 fetch 手动发请求
             - [ ] TS 考点：给表单数据定义接口 interface LogInput { content: string; level: 'info' | 'warn' | 'error' }
+            - [√] 初始化了项目，多了package.json文件并且安装了TypeScript
         - 环节 2：POST /logs（后端接口）
             - [ ] Express 接收 POST，解析 JSON body
             - [ ] 校验字段（content 非空、level 合法），不合法返回 400

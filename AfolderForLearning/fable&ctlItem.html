@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>控件与value语法演示</title>
+    <style>
+        .form-item { margin: 16px 0; }
+        .label-title { display: inline-block; width: 80px; text-align: right; margin-right: 10px; }
+    </style>
+</head>
+<body>
+    <h3>表单控件与 value 语法关系演示</h3>
+
+    <!-- form 是表单容器：提交时会把所有带 name 的控件，以「name=value」的键值对形式提交 -->
+    <form id="demoForm">
+
+        <!-- 1. 单行文本输入框 -->
+        <div class="form-item">
+            <!-- 这是 label 标签：只做文字说明，不产生数据 -->
+            <label for="username" class="label-title">用户名：</label>
+            <!-- 这是控件：<input type="text"> 文本输入控件 -->
+            <!-- value 属性：这里写的是「默认值」，用户修改输入内容后，value 会同步变成用户输入的内容 -->
+            <!-- name 属性：提交时的「键名」，最终提交格式：username=用户输入的值 -->
+            <input type="text" id="username" name="username" value="默认姓名">
+        </div>
+
+        <!-- 2. 单选按钮组 -->
+        <div class="form-item">
+            <span class="label-title">性别：</span>
+            <!-- 控件是 <input type="radio">，靠相同的 name 归为一组，同一组只能选一个 -->
+            <!-- value 是提前写死的固定值，选中哪个，提交时就带哪个的 value -->
+            <label><input type="radio" name="gender" value="male" checked> 男</label>
+            <label><input type="radio" name="gender" value="female"> 女</label>
+        </div>
+
+        <!-- 3. 复选框组 -->
+        <div class="form-item">
+            <span class="label-title">爱好：</span>
+            <!-- 控件是 <input type="checkbox">，勾选的项才会被提交 -->
+            <!-- value 是预设固定值，可多选，提交时同一个 name 会对应多个 value -->
+            <label><input type="checkbox" name="hobby" value="reading"> 阅读</label>
+            <label><input type="checkbox" name="hobby" value="running" checked> 跑步</label>
+            <label><input type="checkbox" name="hobby" value="music"> 音乐</label>
+        </div>
+
+        <!-- 4. 下拉选择框 -->
+        <div class="form-item">
+            <label for="city" class="label-title">城市：</label>
+            <!-- 控件是 <select>，它本身不直接写 value，值来自选中的 <option> -->
+            <select id="city" name="city">
+                <!-- value 写在每个 option 上，选中哪个 option，select 的值就是哪个的 value -->
+                <option value="beijing">北京</option>
+                <option value="shanghai" selected>上海</option>
+                <option value="guangzhou">广州</option>
+            </select>
+        </div>
+
+        <!-- 5. 多行文本域 -->
+        <div class="form-item">
+            <label for="remark" class="label-title">备注：</label>
+            <!-- 控件是 <textarea>，它的 value 不是写在属性里，而是写在标签中间 -->
+            <textarea id="remark" name="remark" rows="3">这是默认备注内容</textarea>
+        </div>
+
+        <!-- 6. 提交按钮 -->
+        <div class="form-item" style="margin-left: 90px;">
+            <!-- 控件是 <input type="submit">，点击触发表单提交 -->
+            <!-- 这里的 value 属性，就是按钮上显示给用户看的文字 -->
+            <input type="submit" value="提交查看结果">
+        </div>
+    </form>
+
+    <script>
+        // 监听表单提交，弹窗展示最终提交的 name 和 value
+        document.getElementById('demoForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // 阻止页面刷新
+            const formData = new FormData(this);
+            let result = '提交的 name = value 列表：\n\n';
+            formData.forEach((value, name) => {
+                result += `${name} = ${value}\n`;
+            });
+            alert(result);
+        });
+    </script>
+</body>
+</html>

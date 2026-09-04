@@ -8,6 +8,7 @@
 
   <style>
     /* ---------- 简单美化 ---------- */
+    /* 让表单居中显示，背景灰色 */
   body {
       font-family: "Microsoft YaHei", sans-serif;
       background: #f5f5f5;
@@ -118,9 +119,9 @@
       <label for="level" class="required">等级</label>
       <select id="level" name="level" required>
         <option value="">-- 请选择 --</option>
-        <option value="low">低</option>
-        <option value="medium">中</option>
-        <option value="high">高</option>
+        <option value="info">信息</option>
+        <option value="warn">警告</option>
+        <option value="error">错误</option>
       </select>
     </div>
 
@@ -166,67 +167,7 @@
 
   </form>
 
-  <script>
-    // 获取表单元素
-    const form = document.getElementById("myForm");
-    const submitBtn = document.getElementById("submitBtn");
-    const resultBox = document.getElementById("result");
-
-    // 监听表单的 submit 事件（比 onsubmit 属性写法更现代）
-    form.addEventListener("submit", function (e) {
-
-      // ★ 核心：阻止默认提交行为，页面不会跳转刷新
-      e.preventDefault();
-
-      // HTML5 校验（required 等）已经通过才会走到这里
-      // 再做一次自定义校验
-      const content = form.content.value.trim();
-      if (content.length < 10) {
-        showResult("内容至少需要10个字！", false);
-        return;
-      }
-
-      // 提交期间禁用按钮，防止重复点击
-      submitBtn.disabled = true;
-      submitBtn.textContent = "提交中...";
-      resultBox.className = "";
-      resultBox.style.display = "none";
-
-      // ★ 核心：用 fetch 手动发请求
-      fetch("/submit", {
-        method: "POST",              // 请求方法
-        body: new FormData(form)     // 自动打包表单所有字段
-      })
-        .then(function (response) {
-          // response：服务器的响应对象
-          if (!response.ok) {
-            // ok 为 false 表示状态码不是 2xx，比如 404、500
-            throw new Error("服务器返回错误：" + response.status);
-          }
-          return response.json();    // 把响应解析成 JSON 对象
-        })
-        .then(function (data) {
-          // data：上一步解析出来的 JSON
-          showResult("✅ 提交成功！服务器说：" + data.message, true);
-          form.reset();              // 清空表单
-        })
-        .catch(function (error) {
-          // 网络不通、服务器不存在、解析失败都会进这里
-          showResult("❌ 提交失败：" + error.message, false);
-        })
-        .finally(function () {
-          // 无论成功失败，都恢复按钮
-          submitBtn.disabled = false;
-          submitBtn.textContent = "提 交";
-        });
-    });
-
-    // 显示结果的小工具函数
-    function showResult(message, isSuccess) {
-      resultBox.textContent = message;
-      resultBox.className = isSuccess ? "success" : "error";
-    }
-  </script>
+  <script type="module" src="submit.js"></script>
 
 </body>
 

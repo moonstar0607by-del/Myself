@@ -1,0 +1,24 @@
+# ===== 依赖 =====
+node_modules/
+
+# ===== 编译产物 =====
+*.js
+*.js.map
+dist/
+
+# ===== 环境与配置 =====
+.env
+.env.local
+
+# ===== 编辑器 / IDE =====
+.vscode/
+.idea/
+*.swp
+
+# ===== 操作系统 =====
+.DS_Store
+Thumbs.db
+
+# ===== 日志 =====
+*.log
+npm-debug.log*
