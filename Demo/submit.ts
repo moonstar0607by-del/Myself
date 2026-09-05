@@ -1,5 +1,5 @@
 // submit.ts
-import { LogInput, LogLevel } from './type';
+import type { LogInput, LogLevel } from './type';
 
 // 获取元素（as 是断言：告诉 TS 这就是个表单元素）
 const form = document.getElementById('myForm') as HTMLFormElement;
