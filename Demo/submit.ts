@@ -43,7 +43,7 @@ form.addEventListener('submit', (e: Event) => {
   submitBtn.disabled = true;
   submitBtn.textContent = '提交中...';
 
-  fetch('/api/logs', {
+  fetch('http://localhost:8000/api/logs', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(logInput),

@@ -28,10 +28,10 @@
             - [√] TS 考点：给表单数据定义接口 interface LogInput { content: string; level: 'info' | 'warn' | 'error' }
             - [√] 初始化了项目，多了package.json文件并且安装了TypeScript
         - 环节 2：POST /api/logs（后端接口，FastAPI）
-            - [ ] FastAPI 建应用，定义 POST /api/logs 路由（路径与前端对齐）
-            - [ ] 用 Pydantic 模型定义请求体：content: str、level: Literal['info','warn','error']
-            - [ ] Pydantic 自动校验，不合法自动返回 422（可自定义改成 400）
-            - [ ] 配置 CORS 中间件（前端 localhost:3000 → 后端 localhost:8000，跨域必须）
+            - [√] FastAPI 建应用，定义 POST /api/logs 路由（路径与前端对齐）
+            - [√] 用 Pydantic 模型定义请求体：content: str、level: Literal['info','warn','error']
+            - [√] Pydantic 自动校验，不合法自动返回 422（可自定义改成 400）
+            - [√] 配置 CORS 中间件（前端 localhost:3000 → 后端 localhost:8000，跨域必须）
         - 环节 3：SQLite（持久化，Python sqlite3 模块）
             - [ ] 连接库并建表：CREATE TABLE IF NOT EXISTS logs (…)
             - [ ] 用参数化查询插入：cursor.execute(“INSERT INTO logs VALUES (?, ?)”, (content, level))
