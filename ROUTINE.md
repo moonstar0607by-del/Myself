@@ -55,3 +55,10 @@
 - 8/29：TS 变量声明、变量类型上；期间解决"同目录同名 ts/js 全局作用域冲突"问题（dist 目录、export{}）。
 - 9/01：TS 类型下；学习项目整理（TS_learning 目录）。
 - 复盘修正：取消"部署到云服务器上线"的误勾；Attached 条目改为进行中（读书笔记待落盘）。
+
+## 第 1 周执行记录（2026-09-05 复盘补充）
+
+- 9/03：Demo 表单初步提交；随后完善表单字段、样式与 fetch 提交。
+- 9/04：Demo 项目化：package.json、tsconfig.json、submit.ts、type.ts 落地。
+- 9/05：TS 接口提交，修正脚本路径与 ROUTINE 勾选。
+- 复盘发现：前端 `dist/submit.js` 为 CommonJS，页面却按 `type="module"` 加载，需修复；后端栈待确认遵守 D5 的 FastAPI；SQLite/POST/GET/列表/部署仍未开始。
