@@ -27,17 +27,25 @@
             - [√] 阻止默认提交行为，用 fetch 手动发请求
             - [√] TS 考点：给表单数据定义接口 interface LogInput { content: string; level: 'info' | 'warn' | 'error' }
             - [√] 初始化了项目，多了package.json文件并且安装了TypeScript
-        - 环节 2：POST /logs（后端接口）
-            - [ ] Express 接收 POST，解析 JSON body
-            - [ ] 校验字段（content 非空、level 合法），不合法返回 400
-            - [ ] TS 考点：给请求体写类型；区分 unknown → 类型收窄（自定义类型守卫是最典型的练习）
-        - 环节 3：SQLite（持久化）
-            - [ ] 建库建表：CREATE TABLE IF NOT EXISTS logs (...)
-            - [ ] 用参数化查询插入（防 SQL 注入的习惯）
-            - [ ] TS 考点：给查询结果定义 interface LogRow，理解数据库返回的是“不确定的形状”
-        - 环节 4：GET /logs（查询接口）
-            - [ ] 查询全部（或加个 limit），返回 JSON 数组
-            - [ ] TS 考点：定义统一响应类型，如 type ApiResult<T> = { ok: true; data: T } | { ok: false; error: string }
+        - 环节 2：POST /api/logs（后端接口，FastAPI）
+            - [ ] FastAPI 建应用，定义 POST /api/logs 路由（路径与前端对齐）
+            - [ ] 用 Pydantic 模型定义请求体：content: str、level: Literal['info','warn','error']
+            - [ ] Pydantic 自动校验，不合法自动返回 422（可自定义改成 400）
+            - [ ] 配置 CORS 中间件（前端 localhost:3000 → 后端 localhost:8000，跨域必须）
+        - 环节 3：SQLite（持久化，Python sqlite3 模块）
+            - [ ] 连接库并建表：CREATE TABLE IF NOT EXISTS logs (…)
+            - [ ] 用参数化查询插入：cursor.execute(“INSERT INTO logs VALUES (?, ?)”, (content, level))
+            —— ? 占位符防 SQL 注入，习惯从第一天养成
+            - [ ] 查询接口 GET /api/logs：返回全部日志（为前端列表环节供数据）
+        - 环节 4（新）：GET /api/logs + 前端渲染日志列表
+            - [ ] FastAPI 提供 GET /api/logs，从 SQLite 查询返回 JSON 数组
+            - [ ] 前端 submit.ts（或新建 list.ts）fetch 拉取日志
+            - [ ] TS 考点①：fetch 的 res.json() 返回 any/unknown
+                —— 数据库返回的是"不确定的形状"，这句话在后端换语言后依然成立
+            - [ ] TS 考点②：定义 interface LogRow，写自定义类型守卫
+                function isLogRow(x: unknown): x is LogRow { ... }
+                校验通过才渲染，不合法丢弃或报错
+            - [ ] 把日志渲染成 <ul> 列表
         - 环节 5：列表渲染（前端闭环）
             - [ ] 页面加载时 fetch('/logs')，拿到数组
             - [ ] 渲染成 <ul> 或表格
