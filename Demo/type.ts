@@ -8,3 +8,9 @@ export interface LogInput {
   content: string;
   level: LogLevel;
 }
+
+// 一条日志的输出结构
+export interface LogRow {
+  content: string;
+  level: LogLevel;
+}

@@ -17,6 +17,10 @@
     - 环节二：FastAPI POST /api/logs 与 CORS
     - 环节三：SQLite 建表、参数化插入、GET /api/logs
     - 后端启动命令：python -m uvicorn backend.main:app --reload --port 8000
+    - 删除log数据调用
+        - Invoke-RestMethod `
+        - Uri http://localhost:8000/api/logs `
+        - Method Delete
 
 ## 仓库结构
 

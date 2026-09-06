@@ -38,19 +38,19 @@
             —— ? 占位符防 SQL 注入，习惯从第一天养成
             - [对] 查询接口 GET /api/logs：返回全部日志（为前端列表环节供数据）
         - 环节 4（新）：GET /api/logs + 前端渲染日志列表
-            - [ ] FastAPI 提供 GET /api/logs，从 SQLite 查询返回 JSON 数组
-            - [ ] 前端 submit.ts（或新建 list.ts）fetch 拉取日志
-            - [ ] TS 考点①：fetch 的 res.json() 返回 any/unknown
+            - [√] FastAPI 提供 GET /api/logs，从 SQLite 查询返回 JSON 数组
+            - [对] 前端 submit.ts（或新建 list.ts）fetch 拉取日志
+            - [√] TS 考点①：fetch 的 res.json() 返回 any/unknown
                 —— 数据库返回的是"不确定的形状"，这句话在后端换语言后依然成立
-            - [ ] TS 考点②：定义 interface LogRow，写自定义类型守卫
+            - [√] TS 考点②：定义 interface LogRow，写自定义类型守卫
                 function isLogRow(x: unknown): x is LogRow { ... }
                 校验通过才渲染，不合法丢弃或报错
-            - [ ] 把日志渲染成 <ul> 列表
+            - [√] 把日志渲染成 <ul> 列表
         - 环节 5：列表渲染（前端闭环）
-            - [ ] 页面加载时 fetch('/logs')，拿到数组
-            - [ ] 渲染成 <ul> 或表格
-            - [ ] 提交成功后刷新列表，看到新数据出现 ← 这一刻全链路打通
-            - [ ] TS 考点：querySelector<HTMLElement> 泛型、fetch 返回 unknown 的处理    
+            - [√] 页面加载时 fetch('/logs')，拿到数组
+            - [√] 渲染成 <ul> 或表格
+            - [√] 提交成功后刷新列表，看到新数据出现 ← 这一刻全链路打通
+            - [√] TS 考点：querySelector<HTMLElement> 泛型、fetch 返回 unknown 的处理    
 - [ ] 当周部署到云服务器上线,每日小步提交。
     - 部署未上线（全链路未通）；每日小步提交已执行（8/28 x4、8/29 x3、9/01 x2）
 - [√] Myself 仓库补根 .gitignore;

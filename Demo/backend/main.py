@@ -36,7 +36,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000"],
     allow_credentials=False,
-    allow_methods=["GET", "POST"],
+    allow_methods=["GET", "POST", "DELETE" ],
     allow_headers=["Content-Type"],
 )
 
@@ -65,5 +65,15 @@ async def get_logs():
         rows = connection.execute(
             "SELECT content, level FROM logs"
         ).fetchall()
+
 # 直接返回 JSON 数组
     return [dict(row) for row in rows]
+
+# 增加DELETE路由，清空SQLite数据库中的日志
+@app.delete("/api/logs")
+async def clear_logs():
+    with sqlite3.connect(DB_PATH) as connection:
+        connection.execute("DELETE FROM logs")
+        connection.commit()
+
+    return {"message": "日志已清空"}

@@ -1,5 +1,5 @@
 // submit.ts
-import type { LogInput, LogLevel } from './type';
+import type { LogInput, LogLevel, LogRow } from './type';
 
 // 获取元素（as 是断言：告诉 TS 这就是个表单元素）
 const form = document.getElementById('myForm') as HTMLFormElement;
@@ -52,9 +52,12 @@ form.addEventListener('submit', (e: Event) => {
       if (!res.ok) throw new Error('服务器错误：' + res.status);
       return res.json();
     })
-    .then((data) => {
+    // 处理返回的 JSON 数据
+    // POST 成功后，新的日志会马上出现在 <ul> 中
+    .then(async () => {
       showResult('✅ 提交成功！', true);
       form.reset();
+      await loadLogs();
     })
     .catch((err) => {
       showResult('❌ 提交失败：' + err.message, false);
@@ -69,3 +72,62 @@ function showResult(message: string, isSuccess: boolean): void {
   resultBox.textContent = message;
   resultBox.className = isSuccess ? 'success' : 'error';
 }
+
+// 6. 类型保护函数：判断一个对象是否符合 LogRow 接口
+// res.json() 得到的数据不能直接相信，只有通过 isLogRow 检查的数据才允许渲染。
+function isLogRow(x: unknown): x is LogRow {
+  if (typeof x !== 'object' || x === null) {
+    return false;
+  }
+
+  const row = x as Record<string, unknown>;
+
+  return (
+    typeof row.content === 'string' &&
+    (row.level === 'info' ||
+      row.level === 'warn' ||
+      row.level === 'error')
+  );
+}
+
+// 7. 加载日志列表
+function getLogList(): HTMLUListElement {
+  const element = document.querySelector<HTMLUListElement>('#logList');
+
+  if (!element) {
+    throw new Error('找不到日志列表元素');
+  }
+
+  return element;
+}
+
+async function loadLogs(): Promise<void> {
+  try {
+    const response = await fetch('http://localhost:8000/api/logs');
+
+    if (!response.ok) {
+      throw new Error(`服务器错误：${response.status}`);
+    }
+
+    const payload: unknown = await response.json();
+
+    if (!Array.isArray(payload)) {
+      throw new Error('服务器返回的数据不是数组');
+    }
+
+    const logs = payload.filter(isLogRow);
+
+    logList.replaceChildren();
+
+    for (const log of logs) {
+      const item = document.createElement('li');
+      item.textContent = `[${log.level}] ${log.content}`;
+      logList.appendChild(item);
+    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : '未知错误';
+    showResult(`❌ 日志加载失败：${message}`, false);
+  }
+}
+
+loadLogs();
