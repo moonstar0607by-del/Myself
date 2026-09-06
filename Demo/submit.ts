@@ -10,10 +10,10 @@ const resultBox = document.getElementById('result') as HTMLDivElement;
 const VALID_LEVELS: LogLevel[] = ['info', 'warn', 'error'];
 
 form.addEventListener('submit', (e: Event) => {
-  // 阻止默认提交（你已完成的部分，保持不变）
+  // 阻止默认提交
   e.preventDefault();
 
-  // 1. 取表单原始数据 —— 注意：此时它们都只是 string（宽类型）
+  // 1. 取表单原始数据 —— 此时它们都只是 string（宽类型）
   const rawContent: string =
     (form.elements.namedItem('content') as HTMLTextAreaElement).value.trim();
   const rawLevel: string =
@@ -25,7 +25,7 @@ form.addEventListener('submit', (e: Event) => {
     return;
   }
 
-  // 3. ★ 核心考点：类型收窄 ★
+  // 3. 等级校验
   //    rawLevel 是 string，不能直接赋给 LogInput.level
   //    必须先验证它在合法清单里
   if (!VALID_LEVELS.includes(rawLevel as LogLevel)) {
@@ -33,17 +33,17 @@ form.addEventListener('submit', (e: Event) => {
     return;
   }
 
-  // 4. 装配成符合接口的对象（此时 TS 才放行）
+  // 4. 装配成符合接口的对象
   const logInput: LogInput = {
     content: rawContent,
     level: rawLevel as LogLevel,
   };
 
-  // 5. 发送（你已完成的部分，只是 body 换成 JSON 格式）
+  // 5. 发送（body 换成 JSON 格式）
   submitBtn.disabled = true;
   submitBtn.textContent = '提交中...';
 
-  fetch('http://localhost:8000/api/logs', {
+  fetch('/api/logs', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(logInput),
@@ -103,7 +103,7 @@ function getLogList(): HTMLUListElement {
 
 async function loadLogs(): Promise<void> {
   try {
-    const response = await fetch('http://localhost:8000/api/logs');
+    const response = await fetch('/api/logs');
 
     if (!response.ok) {
       throw new Error(`服务器错误：${response.status}`);
@@ -117,6 +117,7 @@ async function loadLogs(): Promise<void> {
 
     const logs = payload.filter(isLogRow);
 
+    const logList = getLogList();
     logList.replaceChildren();
 
     for (const log of logs) {
