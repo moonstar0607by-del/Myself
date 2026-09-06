@@ -33,10 +33,10 @@
             - [√] Pydantic 自动校验，不合法自动返回 422（可自定义改成 400）
             - [√] 配置 CORS 中间件（前端 localhost:3000 → 后端 localhost:8000，跨域必须）
         - 环节 3：SQLite（持久化，Python sqlite3 模块）
-            - [ ] 连接库并建表：CREATE TABLE IF NOT EXISTS logs (…)
-            - [ ] 用参数化查询插入：cursor.execute(“INSERT INTO logs VALUES (?, ?)”, (content, level))
+            - [√] 连接库并建表：CREATE TABLE IF NOT EXISTS logs (…)
+            - [√] 用参数化查询插入：cursor.execute(“INSERT INTO logs VALUES (?, ?)”, (content, level))
             —— ? 占位符防 SQL 注入，习惯从第一天养成
-            - [ ] 查询接口 GET /api/logs：返回全部日志（为前端列表环节供数据）
+            - [对] 查询接口 GET /api/logs：返回全部日志（为前端列表环节供数据）
         - 环节 4（新）：GET /api/logs + 前端渲染日志列表
             - [ ] FastAPI 提供 GET /api/logs，从 SQLite 查询返回 JSON 数组
             - [ ] 前端 submit.ts（或新建 list.ts）fetch 拉取日志

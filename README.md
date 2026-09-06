@@ -12,6 +12,12 @@
 - FastAPI 教程基础 + 中间件 + 依赖注入已完成;TypeScript 基础类型四章已完成。
 - 学习日志见 `logs_learning/`(demo = 完成的代码练习,note = 概念笔记;按约定两者均为"字迹",非特别紧急不改动)。
 
+- 我的进度：
+    - 环节一：前端表单与 TypeScript fetch
+    - 环节二：FastAPI POST /api/logs 与 CORS
+    - 环节三：SQLite 建表、参数化插入、GET /api/logs
+    - 后端启动命令：python -m uvicorn backend.main:app --reload --port 8000
+
 ## 仓库结构
 
 - `Fast_apiPorject/fastApiProject/main.py` — FastAPI 练习代码

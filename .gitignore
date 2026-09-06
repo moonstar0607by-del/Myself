@@ -9,6 +9,7 @@ Fast_apiPorject/.venv
 .env.*
 !.env.example
 
+# Ignore ".idea" folder, Python cache files, and specific files
 .idea/
 __pycache__/
 files/1.jpeg/
