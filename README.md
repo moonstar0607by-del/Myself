@@ -4,11 +4,11 @@
 
 > 系统的长期记忆、决策与冲刺计划在本地 `E:\冰\CONTEXT.md`;本仓库只放代码、学习日志与每周计划记录。
 
-## 当前进度(2026-09-05)
+## 当前进度(2026-09-06)
 
-- 2026-09-05:仓库已有 17 个 commit,main 与 origin/main 同步。
-- 前端 `Demo/` 已有表单、TS 类型契约与编译配置,但 `dist/submit.js` 是 CommonJS 而页面按 ESM 加载,当前 demo 需修复后才能浏览器运行。
-- 后端仍未开始:SQLite、POST /logs、GET /logs、列表渲染、部署上线为 W2 剩余重点。
+- 2026-09-06:最薄全链路代码已打通 —— 表单 → POST /api/logs → SQLite → GET /api/logs → 列表渲染。后端 `Demo/backend/main.py`(FastAPI + SQLite + CORS),前端 `Demo/forDemo.html` + `submit.ts`(类型守卫 + 渲染)。ESM/CJS 阻断已修复(`package.json` type:module、`tsconfig` module:es2022)。
+- 仓库共 24 个 commit;9/06 有 1 个未推送 commit `45bcac6`。
+- 剩余:部署上线、浏览器真实跑通(前端服务方式与 CORS 对齐)、仓库卫生(`git rm --cached` 清 .idea//__pycache__/测试图)。
 - FastAPI 教程基础 + 中间件 + 依赖注入已完成;TypeScript 基础类型四章已完成。
 - 学习日志见 `logs_learning/`(demo = 完成的代码练习,note = 概念笔记;按约定两者均为"字迹",非特别紧急不改动)。
 
@@ -38,6 +38,7 @@
 
 ## 历史
 
+- 2026-09-06:全链路代码打通(SQLite + POST/GET + 前端渲染),ESM 修复。
 - 2026-08-28 ~ 09-01:W1 学习小步提交(FastAPI 中间件/依赖注入/ORM 暂缓,TS 入门四章)。
 - 2026-09-03 ~ 09-05:前端表单初步搭建、TS 接口与编译配置落地;新增 5 个 commit。
 - 2026-08-24 / 08-27:建仓,第 0 周学习提交。
